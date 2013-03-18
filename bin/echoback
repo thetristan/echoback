@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+
+var commander = require('commander');
+var package = require('../package.json');
+var echoback = require('..');
+
+commander.version(package.version)
+  .usage('<server name> <port>')
+  .description('simple server that echoes back request parameters for verification purposes')
+  .parse(process.argv);
+
+var name = commander.args[0]
+var port = commander.args[1]
+
+if (!port || !name) {
+  console.log(commander.help());
+  process.exit(1);
+}
+
+echoback(name, port);

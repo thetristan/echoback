@@ -1,0 +1,27 @@
+{
+  "name": "echoback",
+  "version": "0.0.1",
+  "description": "Express server that echoes back all request parameters for verification purposes",
+  "main": "index.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "bin": {
+    "echoback": "./bin/echoback"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thetristan/echoback"
+  },
+  "author": "Tristan Blease",
+  "license": "BSD",
+  "dependencies": {
+    "express": "~3.1.0",
+    "commander": "~1.1.1",
+    "underscore": "~1.4.4"
+  },
+  "devDependencies": {
+    "coffee-script": "~1.6.2",
+    "mocha": "~1.8.2"
+  }
+}
