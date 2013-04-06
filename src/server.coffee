@@ -15,6 +15,7 @@ module.exports = echoback = (serverName, port, cb) ->
 
   requestToJSON = (req) ->
     JSON.stringify
+      route:    "#{req.method} #{req.path}"
       server:   serverName
       port:     port
       path:     req.path
@@ -39,13 +40,12 @@ module.exports = echoback = (serverName, port, cb) ->
     <!doctype html>
     <html>
     <head>
-      <title>Echoback #{VERSION}</title>
-      <link href="#{CSS_URL}" rel="stylesheet">
+      <title>#{serverName} | Echoback #{VERSION}</title>
+      <style>* { font-family: Helvetica, Arial, sans-serif; }</style>
     </head>
     <body>
-      <h1>#{serverName}</h1>
+      <h1>#{req.method} #{req.path}</h1>
       <h3>Port: #{port}</h3>
-      <h3>Path: #{req.path}</h3>
       <h3>Query:</h3>
       <ul>#{query}</ul>
       <h3>Cookies:</h3>
@@ -69,7 +69,7 @@ module.exports = echoback = (serverName, port, cb) ->
       res.type('html')
       res.send requestToHTML(req)
 
-  app.get('*', handler)
+  app.all('*', handler)
 
   server = http.createServer(app).listen port, ->
     log("#{serverName} now listening on #{port}")
