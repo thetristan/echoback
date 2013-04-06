@@ -1,6 +1,6 @@
 {
   "name": "echoback",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Express server that echoes back all request parameters for verification purposes",
   "main": "index.js",
   "scripts": {
