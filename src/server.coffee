@@ -8,6 +8,7 @@ CSS_URL = "//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combi
 module.exports = echoback = (serverName, port, cb) ->
   app = express()
   app.use express.cookieParser()
+  app.use express.bodyParser()
 
   log = (msg) ->
     console.log(msg)
@@ -20,6 +21,7 @@ module.exports = echoback = (serverName, port, cb) ->
       query:    req.query
       cookies:  req.cookies
       headers:  req.headers
+      body:     req.body
 
   requestToHTML = (req) ->
     query = map req.query, (val, key) -> "<li>#{key}: #{val}</li>"
@@ -30,6 +32,8 @@ module.exports = echoback = (serverName, port, cb) ->
 
     headers = map req.headers, (val, key) -> "<li>#{key}: #{val}</li>"
     headers = headers.join('')
+
+    body = if Object.keys(req.body).length > 0 then req.body else ""
 
     """
     <!doctype html>
@@ -48,6 +52,8 @@ module.exports = echoback = (serverName, port, cb) ->
       <ul>#{cookies}</ul>
       <h3>Headers:</h3>
       <ul>#{headers}</ul>
+      <h3>Body:</h3>
+      <div>#{body}</div>
     </body>
     </html>
     """
